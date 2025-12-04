@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>کانون‌های فرهنگی دانشگاه اردکان</title>
+<style>
+  :root{
+    --page-bg: linear-gradient(135deg,#071427 10%, #0f1724 100%);
+    --card-bg-default: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.06);
+    --text: #ffffff;
+    --muted: rgba(255,255,255,0.78);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family: "Vazirmatn", "IRANSans", system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:var(--text); background:var(--page-bg); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+
+  /* HEADER */
+  .site-header{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 28px;
+    background:linear-gradient(140deg, rgba(3, 87, 255, 0.629), rgba(255, 255, 255, 0.45));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.251);
+    backdrop-filter: blur(8px) saturate(120%);
+  }
+  .brand{display:flex;gap:14px;align-items:center}
+  .brand .logo{
+    width:88px;height:88px;border-radius:12px;overflow:hidden;
+    border:3px solid rgba(255,255,255,0.06);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6), 0 0 18px rgba(255,180,0,0.05) inset;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    flex:0 0 88px;
+  }
+  .brand .logo img{width:100%;height:100%;object-fit:contain;display:block}
+  .brand h1{margin:0;font-size:1.25rem;color:#ffffff}
+  .brand p{margin:0;font-size:0.85rem;color:var(--muted)}
+
+  .header-flair{display:flex;align-items:center;gap:12px}
+  .neon-tag{padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,#3c1efb9f,#ffffff);color:#000000;font-weight:700;box-shadow:0 10px 40px rgba(107,33,168,0.12)}
+
+  /* MAIN LAYOUT */
+  main{padding:22px 20px 60px;max-width:1200px;margin:0 auto;width:100%}
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap:18px;
+    align-items:start;
+  }
+
+  /* VIP (امور فرهنگی)
+  .vip-wrap{grid-column: 1 / -1;display:flex;justify-content:center}
+  .vip-card{
+    width:100%;
+    max-width:980px;
+    display:flex;
+    gap:16px;
+    align-items:center;
+    padding:14px;
+    border-radius:14px;
+    background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+    border:2px solid rgba(166, 36, 36, 0.855);
+    box-shadow: 0 18px 50px rgba(232, 14, 14, 0.55);
+  }
+  .vip-card .left{flex:0 0 220px}
+  .vip-card .left img{width:220px;height:140px;object-fit:cover;border-radius:10px;border:3px solid rgba(255,255,255,0.04)}
+  .vip-meta h3{margin:0;color:#ffffff;font-size:1.15rem}
+  .vip-meta p{margin:8px 0 0;color:var(--muted)} */
+
+  /* CARD (glass) */
+  .card{
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    padding:8%;
+    background: linear-gradient(180deg, rgba(3, 87, 255, 0.629), rgba(255, 255, 255, 0.45));
+    border:1px solid var(--glass-border);
+    backdrop-filter: blur(8px) saturate(120%);
+    box-shadow: 0 10px 30px rgba(1, 149, 212, 0.416);
+    transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s, border-color .35s;
+    min-height:120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  /* card image layer (per-card background) */
+  .card::before{
+    content:'';
+    position:absolute; inset:0;
+    background-size:cover;
+    background-position:center center;
+    opacity:0;
+    transition:opacity .45s ease;
+    z-index:0;
+    filter:brightness(.78);
+  }
+  /* colored tint overlay (local to card) */
+  .card::after{
+    content:'';
+    position:absolute; inset:0;
+    pointer-events:none;
+    mix-blend-mode:overlay;
+    background: linear-gradient(180deg, rgba(38, 138, 231, 0.844), rgba(0,0,0,0.20));
+    opacity:0;
+    transition:opacity .35s ease;
+    z-index:1;
+  }
+
+  .card .content{position:relative; z-index:2; width:100%}
+  .card .icon{width:56px;height:56px;margin:0 auto 10px;border-radius:10px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center}
+  .card .icon img{width:36px;height:36px;display:block}
+  .card h4{margin:0;font-size:1rem}
+  .card p{margin:8px 0 0;color:var(--muted);font-size:0.88rem;min-height:34px}
+
+  .card .enter{
+    display:inline-block;
+    margin-top:12px;
+    padding:4% 2%;
+    border-radius:10px;
+    text-decoration:none;
+    color:var(--text);
+    background: linear-gradient(90deg, rgba(33, 81, 204, 0.707), rgba(0, 0, 0, 0.503));
+    border:1px solid rgba(255,255,255,0.06);
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .25s ease, transform .25s ease;
+    z-index:2;
+  }
+
+  /* active style for single card only */
+  .card.active{
+    transform: translateY(-6px) scale(1.03);
+    border-color: rgba(255, 255, 255, 0.234);
+    box-shadow: 0 30px 90px rgba(255, 255, 255, 0.7);
+    background: linear-gradient(90deg, rgba(33, 81, 204, 0.707), rgba(0, 0, 0, 0.503));
+  }
+  .card.active::after{ opacity: 1; }
+  .card.active::before{ opacity: 1; transform: scale(1.02); }
+  .card.active .enter{ opacity:1; transform:translateY(0); }
+
+  /* When card has local accent, we set the overlay gradient using inline style --local-accent */
+  /* Example: card.style.setProperty('--local-accent','rgba(200,30,30,0.18)') */
+  .card[data-local-accent]::after{
+    background: linear-gradient(180deg, rgba(255,255,255,0.00), var(--local-accent, rgba(255,255,255,0.03)));
+  }
+
+  /* smaller cards on larger screens (so they look compact) */
+  @media (min-width:1200px){
+    .grid{grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:22px}
+    .card{padding:14px; min-height:110px}
+    .card .icon{width:54px;height:54px}
+  }
+
+  /* tablet */
+  @media (max-width:1024px){
+    .vip-card .left img{height:140px}
+    .card{min-height:110px}
+  }
+
+  /* mobile */
+@media (max-width:600px){
+    .site-header{padding:14px; gap:10px}
+    .brand .logo{width:64px;height:64px;flex:0 0 64px}
+    .brand h1{font-size:1rem}
+    main{padding:16px}
+    .grid{grid-template-columns:1fr; gap:14px}
+    .card{padding:10%; min-height:140px}
+    .card h4{font-size:0.98rem}
+    .card p{font-size:0.85rem}
+
+    /* دکمه ورود در موبایل همیشه دیده شود */
+    .card .enter{opacity:1; transform:translateY(0)}
+
+    /* VIP box mobile */
+    .vip-card{flex-direction:column; text-align:center}
+    .vip-card .left img{width:100%;height:200px;object-fit:cover}
+}
+
+
+  /* footer */
+  footer{
+    padding:18px 20px;
+    background:linear-gradient(250deg, rgba(166, 169, 175, 0.75), rgba(1, 37, 137, 0.43));
+    color:var(--muted);
+    border-top:1px solid rgba(7, 1, 84, 0.682);
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  }
+  .footer-left{display:flex;align-items:center;gap:12px}
+  .footer-left img{width:72px;height:auto;border-radius:8px;border:2px solid rgba(255,255,255,0.03)}
+  .footer-right{font-size:0.95rem;color:var(--muted)}
+
+  /* small helper to keep content centered */
+  .center{max-width:1200px;margin:0 auto;width:100%}
+
+</style>
+</head>
+<body style="font-family:Arial, Helvetica, sans-serif;">
+
+  <header class="site-header center">
+    <div class="brand">
+      <div class="logo"><img src="logo-uni.png" alt="لوگوی دانشگاه"></div>
+      <div>
+        <h1>کانون‌های فرهنگی دانشگاه اردکان</h1>
+        <p style="margin-top:6px;color:var(--muted);font-size:0.88rem">دسترسی سریع به کانال‌های ایتا</p>
+      </div>
+    </div>
+
+    <div class="header-flair">
+      <a class="neon-tag" type="bottom" href="https://eitaa.com/farhangiardakanuni">کانال ایتای امور فرهنگی</a>
+    </div>
+  </header>
+
+  <main class="center">
+    <section class="grid">
+
+     
+
+      <!-- Cards: each card supports:
+           data-link -> آدرس کانال
+           data-theme-accent (hex) -> رنگ اصلی (e.g. #b91c1c)
+           data-bg -> optional image URL to show inside the card (only the card)
+      -->
+      <div class="card" style=" background: linear-gradient(180deg, rgba(240, 240, 240, 0.629), rgba(0, 0, 0, 0.45));
+      ">
+        <div class="content" >
+          <div class="icon" ><img src="content.png" alt="رسانه"></div>
+          <h4>کانون رسانه</h4>
+          <!-- <p>پوشش خبری، رسانه و محتوای دیجیتال</p> -->
+          <a class="enter" href="https://eitaa.com/Resaneh_ArdakanUni" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card" style=" background: linear-gradient(180deg, rgba(251, 4, 4, 0.629), rgba(230, 228, 228, 0.45));
+      ">
+        <div class="content">
+          <div class="icon"><img src="moon.png" alt="هلال"></div>
+          <h4>کانون هلال احمر</h4>
+          <!-- <p>فعالیت‌های انسان‌دوستانه و داوطلبی</p> -->
+          <a class="enter" href="https://eitaa.com/kanoonhelalahmarardakan" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card" style=" background: linear-gradient(180deg, rgba(248, 124, 1, 0.663), rgba(250, 206, 62, 0.729));
+      ">
+        <div class="content">
+          <div class="icon"><img src="book.png" alt="کتاب"></div>
+          <h4>کانون کتاب ترنج</h4>
+          <!-- <p>مطالعه، کتاب‌خوانی و جلسات فرهنگی</p> -->
+          <a class="enter" href="https://eitaa.com/torrangg" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card" style=" background: linear-gradient(180deg, rgba(0, 187, 255, 0.629), rgba(255, 255, 255, 0.45));
+      ">
+        <div class="content">
+          <div class="icon"><img src="love.png" alt="خیریه"></div>
+          <h4>کانون خیریه چتر مهربانی</h4>
+          <!-- <p>فعالیت خیریه و اجتماعی</p> -->
+          <a class="enter" href="https://eitaa.com/chatremehrabaani" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card" >
+        <div class="content">
+          <div class="icon"><img src="poetry.png" alt="شعر"></div>
+          <h4>کانون شعر و ادب آوا</h4>
+          <!-- <p>شعرخوانی، ادبیات و برنامه‌ها</p> -->
+          <a class="enter" href="https://eitaa.com/Kanoon_poetry_Ava" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card" style=" background: linear-gradient(180deg, rgba(58, 130, 253, 0.629), rgba(255, 0, 0, 0.45));
+      ">
+        <div class="content">
+          <div class="icon"><img src="healthcare.png" alt="سلامت"></div>
+          <h4>کانون همیاران سلامت</h4>
+          <!-- <p>سلامت، آموزش و فعالیت‌های فرهنگی</p> -->
+          <a class="enter" href="https://eitaa.com/hamyaran_salamatt" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card"  style=" background: linear-gradient(180deg, rgba(170, 0, 255, 0.629), rgba(62, 62, 62, 0.45));
+      ">
+        <div class="content">
+          <div class="icon"><img src="music.png" alt="موسیقی"></div>
+          <h4>کانون موسیقی سروآزاد</h4>
+          <!-- <p>موسیقی، اجرا و آموزش</p> -->
+          <a class="enter" href="https://eitaa.com/music_center_ardakan" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+      <div class="card" style=" background: linear-gradient(180deg, rgba(255, 9, 9, 0.629), rgba(40, 39, 39, 0.45));
+      ">
+        <div class="content">
+          <div class="icon"><img src="theater.png" alt="تئاتر"></div>
+          <h4>کانون تئاتر</h4>
+          <!-- <p>نمایش، اجرا و فعالیت‌های هنری</p> -->
+          <a class="enter" href="https://eitaa.com/theater_arduni" target="_blank">ورود به کانال</a>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="center" style="text-align: center;">
+    <div class="footer-left" style="text-align: center;">
+      <img src="logo-uni.png" alt="لوگوی دانشگاه">
+      <img src="farhang.png" alt="لوگوی دانشگاه">
+      <!-- <div style="font-weight:700;color:#ffd166">کانون‌های فرهنگی دانشگاه اردکان</div> -->
+    </div>
+    <!-- <div class="footer-right">© تمامی حقوق برای دانشگاه اردکان محفوظ است</div> -->
+  </footer>
+
+  <script>
+    (function () {
+      const cards = document.querySelectorAll('.card');
+    
+      // تبدیل HEX به RGBA
+      function hexToRgba(hex, alpha = 0.45) {
+        if (!hex) return null;
+        hex = hex.replace('#', '');
+        if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+        const num = parseInt(hex, 16);
+        return `rgba(${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}, ${alpha})`;
+      }
+    
+      // حذف active از همه کارت‌ها
+      function clearActive() {
+        cards.forEach(c => {
+          c.classList.remove('active');
+          c.style.removeProperty('--local-accent');
+        });
+      }
+    
+      // رفتار کلیک
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          clearActive();
+    
+          const accent = card.dataset.themeAccent;
+          const bg = card.dataset.bg;
+    
+          // فعال‌کردن کارت
+          card.classList.add('active');
+    
+          // رنگ اختصاصی کارت
+          if (accent) {
+            const rgba = hexToRgba(accent, 0.55);
+            card.style.setProperty('--local-accent', rgba);
+          }
+    
+          // بک‌گراند اختصاصی کارت
+          if (bg && bg.trim() !== "") {
+            card.style.setProperty('--card-bg-img', `url(${bg})`);
+            card.style.setProperty('--card-bg-img-opacity', "1");
+          }
+        });
+      });
+    })();
+    </script>
+    
+
+</body>
+</html>
